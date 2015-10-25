@@ -10,6 +10,7 @@
     <script src="js/app.js"></script>
     <script src="js/toDoListController.js"></script>
     <script src="js/filterController.js"></script>
+    <script src="js/taskLineDirective.js"></script>
   </head>
 
   <body class = "container" ng-controller="ToDoListController as listCtrl">
@@ -21,19 +22,22 @@
       </form>
       <div class="panel-body" ng-show = "filterCtrl.isSelected('all')">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
-          <li ng-include="'task-line.html'">
+          <li>
+            <task-line></task-line>
           </li>
         </ul>
       </div>
       <div class="panel-body"  ng-show = "filterCtrl.isSelected('active')">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
-          <li ng-include="'task-line.html'" ng-show = "task.done === 'active'">
+          <li ng-show = "task.done === 'active'">
+            <task-line></task-line>
           </li>
         </ul>
       </div>
       <div class="panel-body" ng-show = "filterCtrl.isSelected('complete')">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
-          <li ng-include="'task-line.html'" ng-show = "task.done === 'complete'">
+          <li ng-show = "task.done === 'complete'">
+            <task-line></task-line>
           </li>
         </ul>
       </div>

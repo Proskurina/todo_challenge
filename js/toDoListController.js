@@ -11,7 +11,6 @@ toDoList.controller('ToDoListController', [function() {
       newTask.done = 'active'
       self.list.push(newTask);
       self.task = {};
-      console.log(self.list)
     };
   };
 
