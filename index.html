@@ -9,16 +9,17 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="js/app.js"></script>
     <script src="js/toDoListController.js"></script>
+    <script src="js/filterController.js"></script>
   </head>
 
   <body class = "container" ng-controller="ToDoListController as listCtrl">
-    <div class = "panel" ng-init = "tab = 1">
+    <div class = "panel" ng-controller = "FilterController as filterCtrl">
       <h3>ToDo List</h3>
       <form class="form-horizontal">
         <input type="text" ng-model="listCtrl.task.entry" placeholder="What needs to be done?">
         <button class="btn" ng-click="listCtrl.addTask()">Add task</button>
       </form>
-      <div class="panel-body" ng-show = "tab === 1">
+      <div class="panel-body" ng-show = "filterCtrl.isSelected(1)">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
           <li >
             {{task.entry}} {{task.done}}
@@ -27,7 +28,7 @@
           </li>
         </ul>
       </div>
-      <div class="panel-body"  ng-show = "tab === 2">
+      <div class="panel-body"  ng-show = "filterCtrl.isSelected(2)">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
           <li ng-show = "task.done === 'active'">
             {{task.entry}} {{task.done}}
@@ -36,7 +37,7 @@
           </li>
         </ul>
       </div>
-      <div class="panel-body" ng-show = "tab === 3">
+      <div class="panel-body" ng-show = "filterCtrl.isSelected(3)">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
           <li ng-show = "task.done === 'complete'">
             {{task.entry}} {{task.done}}
@@ -46,12 +47,21 @@
         </ul>
       </div>
       <div> Total number of tasks: {{listCtrl.list.length}}</div>
-      <div class="panel-footer" >
+
+      <div class="panel-footer">
         <ul class = "nav nav-pills">
-          <li> <a href ng-click = "tab=1">All</a> </li>
-          <li> <a href ng-click = "tab=2">Active</a> </li>
-          <li> <a href ng-click = "tab=3">Complete</a> </li>
-          <li> <a href ng-click = "listCtrl.deleteAll()">Clear all</a> </li>
+          <li ng-class = "{active:filterCtrl.isSelected(1)}">
+            <a href ng-click = "filterCtrl.selectTab(1)">All</a>
+          </li>
+          <li ng-class = "{active:filterCtrl.isSelected(2)}">
+            <a href ng-click = "filterCtrl.selectTab(2)">Active</a>
+          </li>
+          <li ng-class = "{active:filterCtrl.isSelected(3)}">
+            <a href ng-click = "filterCtrl.selectTab(3)">Complete</a>
+          </li>
+          <li ng-class = "{active:filterCtrl.isSelected(4)}">
+            <a href ng-click = "filterCtrl.selectTab(4); listCtrl.deleteAll()">Clear all</a>
+          </li>
         </ul>
       </div>
 
