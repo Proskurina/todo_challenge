@@ -3,11 +3,14 @@ toDoList.controller('ToDoListController', [function() {
   var self = this;
 
   self.list = [];
+  self.task = {};
 
   self.addTask = function(){
-    if (self.newTask) {
-      self.list.push(self.newTask);
-      self.newTask = '';
+    if (self.task) {
+      var newTask = self.task
+      newTask.done = 'active'
+      self.list.push(newTask);
+      self.task = {};
       console.log(self.list)
     };
   };
@@ -17,6 +20,10 @@ toDoList.controller('ToDoListController', [function() {
     if (index != -1) {
       self.list.splice(index, 1);
     };
+  };
+
+  self.deleteAll = function(task){
+    self.list = [];
   };
 
 }]);

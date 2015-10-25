@@ -12,18 +12,49 @@
   </head>
 
   <body class = "container" ng-controller="ToDoListController as listCtrl">
-    <div>
+    <div ng-init = "tab = 1">
       <form class="form-horizontal">
-        <input type="text" ng-model="listCtrl.newTask">
+        <input type="text" ng-model="listCtrl.task.entry" placeholder="What needs to be done?">
         <button class="btn" ng-click="listCtrl.addTask()">Add task</button>
       </form>
-      <ul class="list-group" ng-repeat="task in listCtrl.list">
-        <li>
-          <input type="checkbox" name="task" value="Done">
-          {{task}}
-          <button class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
-        </li>
-      </ul>
+      <div class="panel" ng-show = "tab === 1">
+        <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
+          <li >
+            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'complete'" ng-false-value = "'active'">
+            {{task.entry}} {{task.done}}
+            <button class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
+          </li>
+        </ul>
+      </div>
+      <div class="panel" ng-show = "tab === 2">
+        <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
+          <li ng-show = "task.done === 'active'">
+            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'completed'" ng-false-value = "'active'">
+            {{task.entry}} {{task.done}}
+            <button class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
+          </li>
+        </ul>
+      </div>
+      <div class="panel" ng-show = "tab === 3">
+        <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
+          <li ng-show = "task.done === 'complete'">
+            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'completed'" ng-false-value = "'active'">
+            {{task.entry}} {{task.done}}
+            <button class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <ul class = "nav nav-pills">
+          <li> <a href ng-click = "tab=1">All</a> </li>
+          <li> <a href ng-click = "tab=2">Active</a> </li>
+          <li> <a href ng-click = "tab=3">Complete</a> </li>
+          <li> <a href ng-click = "listCtrl.deleteAll()">Clear all</a> </li>
+        </ul>
+      </div>
+
+      <div> Total number of tasks: {{listCtrl.list.length}}</div>
     </div>
   </body>
 </html>
