@@ -29,7 +29,7 @@
       <div class="panel" ng-show = "tab === 2">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
           <li ng-show = "task.done === 'active'">
-            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'completed'" ng-false-value = "'active'">
+            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'complete'" ng-false-value = "'active'">
             {{task.entry}} {{task.done}}
             <button class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
           </li>
@@ -38,7 +38,7 @@
       <div class="panel" ng-show = "tab === 3">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
           <li ng-show = "task.done === 'complete'">
-            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'completed'" ng-false-value = "'active'">
+            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'complete'" ng-false-value = "'active'">
             {{task.entry}} {{task.done}}
             <button class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
           </li>
