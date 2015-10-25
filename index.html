@@ -19,30 +19,21 @@
         <input type="text" ng-model="listCtrl.task.entry" placeholder="What needs to be done?">
         <button class="btn" ng-click="listCtrl.addTask()">Add task</button>
       </form>
-      <div class="panel-body" ng-show = "filterCtrl.isSelected(1)">
+      <div class="panel-body" ng-show = "filterCtrl.isSelected('all')">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
-          <li >
-            {{task.entry}} {{task.done}}
-            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'complete'" ng-false-value = "'active'">
-            <button class = "pull-right" class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
+          <li ng-include="'task-line.html'">
           </li>
         </ul>
       </div>
-      <div class="panel-body"  ng-show = "filterCtrl.isSelected(2)">
+      <div class="panel-body"  ng-show = "filterCtrl.isSelected('active')">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
-          <li ng-show = "task.done === 'active'">
-            {{task.entry}} {{task.done}}
-            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'complete'" ng-false-value = "'active'">
-            <button class = "pull-right" class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
+          <li ng-include="'task-line.html'" ng-show = "task.done === 'active'">
           </li>
         </ul>
       </div>
-      <div class="panel-body" ng-show = "filterCtrl.isSelected(3)">
+      <div class="panel-body" ng-show = "filterCtrl.isSelected('complete')">
         <ul class="list-group" style="list-style-type:none" ng-repeat="task in listCtrl.list">
-          <li ng-show = "task.done === 'complete'">
-            {{task.entry}} {{task.done}}
-            <input type="checkbox" name="task" value="Done" ng-model = "task.done" ng-true-value = "'complete'" ng-false-value = "'active'">
-            <button class = "pull-right" class="btn-small" ng-click="listCtrl.deleteTask(task)">x</button>
+          <li ng-include="'task-line.html'" ng-show = "task.done === 'complete'">
           </li>
         </ul>
       </div>
@@ -50,17 +41,17 @@
 
       <div class="panel-footer">
         <ul class = "nav nav-pills">
-          <li ng-class = "{active:filterCtrl.isSelected(1)}">
-            <a href ng-click = "filterCtrl.selectTab(1)">All</a>
+          <li ng-class = "{active:filterCtrl.isSelected('all')}">
+            <a href ng-click = "filterCtrl.selectFilter('all')">All</a>
           </li>
-          <li ng-class = "{active:filterCtrl.isSelected(2)}">
-            <a href ng-click = "filterCtrl.selectTab(2)">Active</a>
+          <li ng-class = "{active:filterCtrl.isSelected('active')}">
+            <a href ng-click = "filterCtrl.selectFilter('active')">Active</a>
           </li>
-          <li ng-class = "{active:filterCtrl.isSelected(3)}">
-            <a href ng-click = "filterCtrl.selectTab(3)">Complete</a>
+          <li ng-class = "{active:filterCtrl.isSelected('complete')}">
+            <a href ng-click = "filterCtrl.selectFilter('complete')">Complete</a>
           </li>
-          <li ng-class = "{active:filterCtrl.isSelected(4)}">
-            <a href ng-click = "filterCtrl.selectTab(4); listCtrl.deleteAll()">Clear all</a>
+          <li ng-class = "{active:filterCtrl.isSelected('clear')}">
+            <a href ng-click = "filterCtrl.selectFilter('clear'); listCtrl.deleteAll()">Clear all</a>
           </li>
         </ul>
       </div>

@@ -1,14 +1,14 @@
 toDoList.controller('FilterController', [function() {
 
   var self = this;
-  self.tab =1;
+  self.filter = 'all';
 
-  this.selectTab = function(setTab){
-    self.tab = setTab;
+  this.selectFilter = function(setFilter){
+    self.filter = setFilter;
   };
 
-  this.isSelected = function(checkTab){
-    return self.tab === checkTab;
+  this.isSelected = function(checkFilter){
+    return self.filter === checkFilter;
   };
 
 }]);
